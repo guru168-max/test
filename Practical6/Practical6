@@ -1,0 +1,95 @@
+class Practical6 {
+
+    public static void displayPattern1(int num) {
+        for (int row = 1; row <= num; row++) {
+            for (int space = 1; space <= num - row; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= 2 * row - 1; col++) {
+                if (col % 2 == 0) {
+                    System.out.print("-");
+                } else {
+                    System.out.print("+");
+                }
+            }
+            System.out.println();
+        }
+
+        for (int row = num - 1; row > 0; row--) {
+            for (int space = 1; space <= num - row; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= 2 * row - 1; col++) {
+                if (col % 2 == 0) {
+                    System.out.print("-");
+                } else {
+                    System.out.print("+");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void displayPattern2(int num) {
+        for (int row = 1; row <= num; row++) {
+            for (int space = 1; space <= num - row; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= 2 * row - 1; col++) {
+                System.out.print("+");
+            }
+            System.out.println();
+        }
+
+        for (int row = num - 1; row > 0; row--) {
+            for (int space = 1; space <= num - row; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= 2 * row - 1; col++) {
+                System.out.print("+");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void displayPattern3(int num) {
+        for (int row = 1; row <= num; row++) {
+            for (int space = 1; space <= num - row; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= 2 * row - 1; col++) {
+                if (col % 2 == 0) {
+                    System.out.print("+");
+                } else {
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+
+        for (int row = num; row > 0; row--) {
+            for (int space = 1; space <= num - row; space++) {
+                System.out.print(" ");
+            }
+            for (int col = 1; col <= 2 * row - 1; col++) {
+                if (col % 2 == 0) {
+                    System.out.print("+");
+                } else {
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Pattern 1:");
+        displayPattern1(3);
+
+        System.out.println("\nPattern 2:");
+        displayPattern2(5);
+
+        System.out.println("\nPattern 3:");
+        displayPattern3(6);
+    }
+}
