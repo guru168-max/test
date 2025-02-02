@@ -1,0 +1,119 @@
+class Practcal_7 {
+    static int rows; 
+    static int cols; 
+    static int center;
+
+    public static void displayWord(int size) {
+        rows = 5 + size; // base value
+        cols = 5 + size; // base value
+        if (rows % 2 == 0) rows++;
+        if (cols % 2 == 0) cols++;
+        center = rows / 2 + 1;
+
+        for (int i = 1; i <= rows; i++) { // Loop for rows
+            drawD(i);
+            System.out.print("  "); // Space between letters
+            drawA(i);
+            System.out.print("  "); // Space between letters
+            drawJ(i);
+            System.out.print("  "); // Space between letters
+            drawI(i);
+            System.out.print("  "); // Space between letters
+            drawG(i);
+            System.out.print("  "); // Space between letters
+            drawU(i);
+            System.out.print("  "); // Space between letters
+            drawR(i);
+            System.out.print("  "); // Space between letters
+            drawU(i);
+            System.out.println();
+        }
+    }
+
+    // Letter D
+    public static void drawD(int i) {
+        for (int j = 1; j <= cols; j++) {
+            if (j == 1 || (j == cols && i > 1 && i < rows) || 
+                (i == 1 && j < cols) || (i == rows && j < cols)) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    // Letter A
+    public static void drawA(int i) {
+        for (int j = 1; j <= 2 * cols; j++) {
+            if ((i == rows - j + 1 && i > 1) || j == cols + i - 1 || 
+                (i == center && j > rows - center && j < rows + center)) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    // Letter J
+    public static void drawJ(int i) {
+        for (int j = 1; j <= cols; j++) {
+            if (i == 1 || j == cols / 2 + 1 || 
+                (i == rows && j <= cols / 2 + 1)) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    // Letter I
+    public static void drawI(int i) {
+        for (int j = 1; j <= cols; j++) {
+            if (i == 1 || i == rows || j == cols / 2 + 1) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    // Letter G
+    public static void drawG(int i) {
+        for (int j = 1; j <= cols; j++) {
+            if (i == 1 || i == rows || j == 1 || 
+                (j == cols && i >= center) || (i == center && j >= center)) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    // Letter U
+    public static void drawU(int i) {
+        for (int j = 1; j <= cols; j++) {
+            if ((j == 1 && i < rows) || (j == cols && i < rows) || 
+                (j != 1 && j != cols && i == rows)) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    // Letter R
+    public static void drawR(int i) {
+        for (int j = 1; j <= cols; j++) {
+            if (j == 1 || (i == 1 && j != cols) || (i == center && j != cols) || 
+                (j == cols && i != 1 && i < center) || (i > center && j > center && i == j)) {
+                System.out.print("*");
+            } else {
+                System.out.print(" ");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        displayWord(1);
+    }
+}
