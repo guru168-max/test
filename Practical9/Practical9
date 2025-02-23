@@ -1,0 +1,122 @@
+public class Practical9 {
+    // Task 1: For comparing the time required to calculate factorial by recursion and iteration
+    
+    public static int[] generateRandomNumbersArray() {
+        int[] array = new int[10];
+        for (int i = 0; i < 10; i++) {
+            array[i] = (int) ((System.nanoTime() % 50) + 1);
+        }
+        return array;
+    }
+
+    public static long iterationFactorialTime(int num) {
+        long startTime = System.nanoTime();
+        int result = 1;
+        for (int i = 1; i <= num; i++) {
+            result = result * i;
+        }
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    private static int recursionFactorial(int num) {
+        if (num == 1 || num == 0) {
+            return 1;
+        }
+        return num * recursionFactorial(num - 1);
+    }
+
+    public static long recursionFactorialTime(int num) {
+        long startTime = System.nanoTime();
+        int result = recursionFactorial(num);
+        long endTime = System.nanoTime();
+        return endTime - startTime;
+    }
+
+    public static void compareFactorialMethods() {
+        int[] array = generateRandomNumbersArray();
+        long totalIterativeTime = 0;
+        long totalRecursiveTime = 0;
+
+        for (int num : array) {
+            long iterativeTimeSum = 0;
+            long recursiveTimeSum = 0;
+
+            for (int i = 0; i < 5; i++) {
+                iterativeTimeSum += iterationFactorialTime(num);
+                recursiveTimeSum += recursionFactorialTime(num);
+            }
+
+            long averageIterativeTime = iterativeTimeSum / 5;
+            long averageRecursiveTime = recursiveTimeSum / 5;
+
+            totalIterativeTime += averageIterativeTime;
+            totalRecursiveTime += averageRecursiveTime;
+        }
+
+        if (totalIterativeTime < totalRecursiveTime) {
+            System.out.println("The iterative method is faster.");
+        } else {
+            System.out.println("The recursive method is faster.");
+        }
+    }
+
+    // Task 2: Method to generate strings and concatenate them to check the time required by String, StringBuffer, and StringBuilder
+
+    public static String createRandomString(int size) {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            int randomValue = (int) (System.nanoTime() % 52);
+            if (randomValue < 26) {
+                s.append((char) (randomValue + 65));  // Uppercase letters
+            } else {
+                s.append((char) (randomValue - 26 + 97)); // Lowercase letters
+            }
+        }
+        return s.toString();
+    }
+
+    public static void stringConcatenationTime(int size) {
+        String s = createRandomString(size);
+
+        // Using String concatenation
+        long startTime = System.nanoTime();
+        String str1 = s + s;
+        long endTime = System.nanoTime();
+        long stringTime = endTime - startTime;
+
+        // Using StringBuilder
+        startTime = System.nanoTime();
+        StringBuilder sb = new StringBuilder(s);
+        sb.append(s);
+        endTime = System.nanoTime();
+        long stringBuilderTime = endTime - startTime;
+
+        // Using StringBuffer
+        startTime = System.nanoTime();
+        StringBuffer sbf = new StringBuffer(s);
+        sbf.append(s);
+        endTime = System.nanoTime();
+        long stringBufferTime = endTime - startTime;
+
+        if (stringTime < stringBuilderTime && stringTime < stringBufferTime) {
+            System.out.println("String concatenation is the fastest.");
+        } else if (stringBuilderTime < stringTime && stringBuilderTime < stringBufferTime) {
+            System.out.println("StringBuilder concatenation is the fastest.");
+        } else {
+            System.out.println("StringBuffer concatenation is the fastest.");
+        }
+    }
+
+    // Main method to test the functionality
+    public static void main(String[] args) {
+        // Test Task 1: Compare Factorial Methods
+        System.out.println("Comparing Factorial Calculation Methods:");
+        compareFactorialMethods();
+
+        // Test Task 2: String Concatenation Performance
+        System.out.println("\nTesting String Concatenation Methods:");
+        int size = 1000; // For example, test with a string of size 1000
+        stringConcatenationTime(size);
+    }
+}
